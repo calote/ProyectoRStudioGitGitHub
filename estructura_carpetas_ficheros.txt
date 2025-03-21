@@ -1,0 +1,24 @@
+proyecto/
+│
+├── datos/                   # Datos para el análisis
+│   ├── crudos/              # Datos originales (no modificar)
+│   └── procesados/          # Datos procesados
+│
+├── imagenes/                # Imágenes estáticas para incluir en el informe
+│
+├── scripts/                 # Scripts de R 
+│   ├── 01_importar.R        # Para cargar y preparar datos
+│   ├── 02_analizar.R        # Para análisis estadísticos
+│   └── 03_visualizar.R      # Para generar gráficos
+│
+├── salida/                  # Resultados generados por los scripts
+│   ├── figuras/             # Gráficos generados (.png, .jpg)
+│   └── resultados/          # Objetos R guardados (.RData, .rds)
+│
+├── informe.qmd              # Documento Quarto principal
+├── _quarto.yml              # Configuración de Quarto
+├── referencias.bib          # Referencias bibliográficas (opcional)
+├── generar_informe.R        # Script para automatizar la generación del informe
+├── .Rproj                   # Archivo de proyecto RStudio
+├── .gitignore               # Archivos a ignorar en Git
+└── README.md                # Instrucciones del proyecto
