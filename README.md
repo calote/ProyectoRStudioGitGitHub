@@ -1,4 +1,4 @@
-# README: Guía para usar este repositorio con Git, GitHub y RStudio (ProyectoRStudioGitGitHub)
+# README: Guía para usar este repositorio con Git, GitHub y RStudio
 Pedro L. Luque
 
 - [Requisitos previos](#requisitos-previos)
@@ -20,6 +20,8 @@ Pedro L. Luque
 - [Comandos útiles de usethis para
   Git/GitHub](#comandos-útiles-de-usethis-para-gitgithub)
 - [Problemas comunes](#problemas-comunes)
+- [Organización del proyecto](#organización-del-proyecto)
+  - [Ventajas de esta separación](#ventajas-de-esta-separación)
 
 # Requisitos previos
 
@@ -157,3 +159,38 @@ gitcreds::gitcreds_set()
 
 ¡Buena suerte con tu trabajo! Si tienes dudas, no dudes en crear un
 “Issue” en este repositorio con tu pregunta.
+
+# Organización del proyecto
+
+## Ventajas de esta separación
+
+1.  **Claridad conceptual**: Cada script tiene una única responsabilidad
+    claramente definida
+
+    - `crear_estructura.R`: Preparar el entorno inicial (se ejecuta solo
+      una vez)
+    - `generar_informe.R`: Ejecutar los análisis y generar el informe
+      (cada vez que sea necesario)
+
+2.  **Mejor experiencia para el usuario**:
+
+    - El alumno primero usa `crear_estructura.R` para preparar su
+      proyecto
+    - Luego adapta los scripts a sus necesidades
+    - Finalmente usa `generar_informe.R` para ejecutar todo el proceso
+
+3.  **Gestión robusta de errores**:
+
+    - Mejor registro de errores con archivos de log para cada script
+    - Verificación de requisitos previos antes de ejecutar
+    - Mensajes claros sobre qué hacer en caso de error
+
+4.  **Flexibilidad de despliegue**:
+
+    - Los informes finales se copian a una carpeta específica
+      (`salida/informes/`)
+    - Se intenta generar el informe de múltiples maneras si una falla
+
+Esta estructura facilita el flujo de trabajo reproducible y ayuda a los
+alumnos a entender las mejores prácticas en la organización de proyectos
+de análisis de datos.
