@@ -19,7 +19,7 @@ bibliography: referencias.bib
 lang: es
 ---
 
-## Introducción
+# Introducción
 
 Este es un informe reproducible creado con Quarto.
 
@@ -36,3 +36,31 @@ knitr::opts_chunk$set(fig.width = 8, fig.height = 5)
 # Cargar datos procesados
 load("salida/resultados/datos_procesados.RData")
 ```
+
+
+# Análisis Exploratorio
+
+```{r}
+#| fig-cap: "Distribución de variables"
+
+# Incluir gráfico generado previamente
+knitr::include_graphics("salida/figuras/exploracion.png")
+```
+
+# Resultados
+
+Aquí puedes incluir tablas y resultados de tu análisis.
+
+```{r}
+knitr::kable(
+  resumen_estadistico,
+  caption = "Tabla 1: Estadísticas descriptivas"
+)
+```
+
+# Conclusiones
+
+Tus conclusiones aquí.
+
+# Referencias
+
