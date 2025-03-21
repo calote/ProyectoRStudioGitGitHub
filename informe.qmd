@@ -1,0 +1,38 @@
+---
+title: "Título del informe"
+author: "Tu nombre"
+date: today
+format:
+  html:
+    toc: true
+    code-fold: true
+  pdf:
+    toc: true
+    number-sections: true
+    documentclass: article
+    papersize: a4
+execute:
+  echo: false
+  warning: false
+  message: false
+bibliography: referencias.bib
+lang: es
+---
+
+## Introducción
+
+Este es un informe reproducible creado con Quarto.
+
+```{r configuracion}
+#| include: false
+
+# Cargar librerías necesarias
+library(tidyverse)
+library(knitr)
+
+# Establecer opciones globales
+knitr::opts_chunk$set(fig.width = 8, fig.height = 5)
+
+# Cargar datos procesados
+load("salida/resultados/datos_procesados.RData")
+```
