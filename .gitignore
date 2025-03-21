@@ -1,8 +1,32 @@
-.Rproj.user
+# Archivos de historial de R
 .Rhistory
+.Rapp.history
+
+# Archivos de sesión de R
 .RData
-.Ruserdata
-.Rdata
-.httr-oauth
+.Rproj.user/
+
+# Archivos de RStudio
+.Rproj.user
+*.Rproj
+
+# Archivos generados por knitr y Quarto
+*.utf8.md
+*.knit.md
+*.html
+*.pdf
+_book/
+_freeze/
+/.quarto/
+
+# Archivos grandes en datos (si aplica)
+datos/crudos/*.csv
+datos/crudos/*.xlsx
+datos/crudos/*.rds
+
+# Archivos del sistema operativo
 .DS_Store
-.quarto
+Thumbs.db
+
+# Registro de errores
+logs/
