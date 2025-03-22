@@ -45,18 +45,54 @@ saveRDS(datos_limpios, here("datos", "procesados", "datos_limpios.rds"))
 ',
     
     "scripts/02_analizar.R" = '# Script para realizar análisis estadísticos
+# Cargar paquetes
 library(tidyverse)
 library(here)
+library(broom)
+
+# Crear carpeta para resultados si no existe
+if (!dir.exists(here("salida", "resultados"))) {
+  dir.create(here("salida", "resultados"), recursive = TRUE)
+}
+
+# Mensaje de inicio
+cat("Iniciando análisis estadístico:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
 
 # Cargar datos procesados
 datos_limpios <- readRDS(here("datos", "procesados", "datos_limpios.rds"))
 
-# Realizar análisis
-# [Añade aquí tu código de análisis]
+# Realizar análisis descriptivo
+resumen_estadistico <- datos_limpios %>%
+  group_by(grupo) %>%
+  summarize(
+    n = n(),
+    media = mean(variable1, na.rm = TRUE),
+    mediana = median(variable1, na.rm = TRUE),
+    desv_est = sd(variable1, na.rm = TRUE),
+    min = min(variable1, na.rm = TRUE),
+    max = max(variable1, na.rm = TRUE)
+  )
+
+# Realizar análisis inferencial
+# ANOVA para comparar grupos
+modelo_anova <- aov(variable1 ~ grupo, data = datos_limpios)
+resultados_anova <- tidy(modelo_anova)
+
+# Correlaciones (si hubiera más variables numéricas)
+matriz_correlacion <- cor(datos_limpios %>% select_if(is.numeric), 
+                          use = "pairwise.complete.obs")
 
 # Guardar resultados
-save(list = ls(pattern = "resultado|modelo|analisis"), 
-     file = here("salida", "resultados", "datos_procesados.RData"))
+save(
+  resumen_estadistico, 
+  resultados_anova, 
+  matriz_correlacion, 
+  file = here("salida", "resultados", "datos_procesados.RData")
+)
+
+# Mensaje final
+cat("Análisis estadístico completado:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Resultados guardados en: salida/resultados/datos_procesados.RData\n")
 ',
     
     "scripts/03_visualizar.R" = '# Script para generar gráficos
@@ -94,16 +130,16 @@ format:
     number-sections: true
     include-in-header: 
       text: |
-        \usepackage{fvextra}
-        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}         
+        \\usepackage{fvextra}
+        \\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\\\\{\\}}         
     include-before-body:
       text: |
-        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+        \\RecustomVerbatimEnvironment{verbatim}{Verbatim}{
           showspaces = false,
           showtabs = false,
           breaksymbolleft={},
           breaklines
-          % Note: setting commandchars=\\\{\} here will cause an error 
+          % Note: setting commandchars=\\\\\\{\\} here will cause an error 
         }                   
         
 #editor: source
@@ -352,7 +388,7 @@ crear_estructura_proyecto <- function() {
   
   ## Verificar paquetes necesarios
   
-  paquetes_necesarios <- c("tidyverse", "knitr", "here", "quarto")  
+  paquetes_necesarios <- c("tidyverse", "knitr", "here", "quarto","broom")  
   paquetes_faltantes <- paquetes_necesarios[!paquetes_necesarios %in% rownames(installed.packages())]
   
   if (length(paquetes_faltantes) > 0) {  
