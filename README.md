@@ -176,9 +176,9 @@ gitcreds::gitcreds_set()
 
     La ejecución de los scripts se puede realizar de dos modos:
 
-    a. Abrir el fichero de script en RStudio y pulsar sobre el botón "Source" (parte superior derecha)
+    1. Abrir el fichero de script en RStudio y pulsar sobre el botón "Source" (parte superior derecha)
 
-    b. En la pestaña "Terminal" de RStudio ejecutar, por ejemplo, la siguiente instrucción: `Rscript generar_informe.R`
+    2. En la pestaña "Terminal" de RStudio ejecutar, por ejemplo, la siguiente instrucción: `Rscript generar_informe.R`
 
 3.  **Mejor experiencia para el usuario**:
 
