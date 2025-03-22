@@ -32,7 +32,8 @@ library(tidyverse)
 library(here)
 
 # Crear mensaje de inicio
-cat("Iniciando importación de datos:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Iniciando importación de datos:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
 
 # Importar datos
 datos_crudos <- read.csv(here("datos", "crudos", "datos.csv"))
@@ -51,8 +52,10 @@ write_csv(datos_limpios, here("datos", "procesados", "datos_limpios.csv"))
 saveRDS(datos_limpios, here("datos", "procesados", "datos_limpios.rds"))
 
 # Mensaje final
-cat("Importación y procesamiento completados:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
-cat("Datos guardados en: datos/procesados/\n")
+cat("Importación y procesamiento completados:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
+cat("Datos guardados en: datos/procesados/")
+cat("")
 ',
     
     "scripts/02_analizar.R" = '# Script para realizar análisis estadísticos
@@ -67,7 +70,8 @@ if (!dir.exists(here("salida", "resultados"))) {
 }
 
 # Mensaje de inicio
-cat("Iniciando análisis estadístico:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Iniciando análisis estadístico:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
 
 # Cargar datos procesados
 datos_limpios <- readRDS(here("datos", "procesados", "datos_limpios.rds"))
@@ -102,8 +106,11 @@ save(
 )
 
 # Mensaje final
-cat("Análisis estadístico completado:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
-cat("Resultados guardados en: salida/resultados/datos_procesados.RData\n")
+cat("Análisis estadístico completado:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
+cat("Resultados guardados en: salida/resultados/datos_procesados.RData")
+cat("")
+
 ',
     
     "scripts/03_visualizar.R" = '# Script para generar gráficos
@@ -117,7 +124,8 @@ if (!dir.exists(here("salida", "figuras"))) {
 }
 
 # Mensaje de inicio
-cat("Iniciando generación de gráficos:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Iniciando generación de gráficos:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
 
 
 # Cargar datos procesados
@@ -176,8 +184,10 @@ ggsave(here("salida", "figuras", "grafico1.png"), p,
        width = 8, height = 5, dpi = 300)
        
 # Mensaje final
-cat("Generación de gráficos completada:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
-cat("Gráficos guardados en: salida/figuras/\n")
+cat("Generación de gráficos completada:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
+cat("Gráficos guardados en: salida/figuras/")
+cat("")
 
 ',
     
@@ -491,3 +501,4 @@ crear_estructura_proyecto <- function() {
 }
 
 crear_estructura_proyecto()
+
