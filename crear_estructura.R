@@ -108,7 +108,7 @@ knitr::opts_chunk$set(fig.width = 8, fig.height = 5)
 
 # Cargar resultados
 load("salida/resultados/datos_procesados.RData")
-````
+```
 
 ### Análisis
 
