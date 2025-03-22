@@ -77,25 +77,45 @@ ggsave(here("salida", "figuras", "grafico1.png"), p, width = 8, height = 5, dpi 
 ',
     
     "informe.qmd" = '---
-title: "Título del informe"
-author: "Tu nombre"
+title: "Título del informe/trabajo"
+subtitle: "Asignatura"
+author: "APELLIDO1 APELLIDO2, NOMBRE"
+lang: es
 date: today
-embed-resources: true
 format:
   html:
     toc: true
+    embed-resources: true
     code-fold: true
   pdf:
     toc: true
+    papersize: a4
+    #documentclass: article
     number-sections: true
+    include-in-header: 
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}         
+    include-before-body:
+      text: |
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+          showspaces = false,
+          showtabs = false,
+          breaksymbolleft={},
+          breaklines
+          % Note: setting commandchars=\\\{\} here will cause an error 
+        }                   
+        
+#editor: source
+bibliography: referencias.bib  # puede comentarla si no usa referencias
 execute:
   echo: false
   warning: false
   message: false
-lang: es
+  #error: true
 ---
 
-## Introducción
+## Introducción {#sec-introduccion}
 
 Este es un informe reproducible creado con Quarto.
 
@@ -105,22 +125,87 @@ library(tidyverse)
 library(knitr)
 
 # Configuración global
-knitr::opts_chunk$set(fig.width = 8, fig.height = 5)
+knitr::opts_chunk$set(fig.width = 8, fig.height = 5, out.width = "100%")
 
 # Cargar resultados
 load("salida/resultados/datos_procesados.RData")
 ```
 
-### Análisis
+::: {.callout-note #nte-introduccion}
+### Objetivos del informe
+
+Los objetivos del informe son:
+
+1.  Describir ...
+
+2.  Visualizar ...
+
+    a.  Según ...
+
+    b.  También ...  
+
+:::
+
+
+Puede consultar información sobre cómo publicar un blog con Quarto en @navarro2022.
+
+
+{{< pagebreak >}}
+
+
+
+
+## Análisis
+
+Como se ha indicado en la [Nota @nte-introduccion] de la sección @sec-introduccion, se analizarán los datos obtenidos.
 
 ```{r}
-#| fig-cap: "Figura 1: Descripción de la figura"
+#| fig-cap: "Descripción de la figura"
+#| label: fig-grafico1
+#| out-width: 90%
+#| fig-pos: H
 knitr::include_graphics("salida/figuras/grafico1.png")
 ```
 
-### Conclusiones
+En la @fig-grafico1 se muestra un gráfico con los datos analizados.
 
-Tus conclusiones aquí.  
+En el texto se puede escribir código como el siguiente: `x = mean(c(1,2,3))` o `y = sd(c(1,2,3))`, calcule ...
+
+## Resultados
+
+Aquí puedes incluir tablas y resultados de su análisis.
+
+En la @tbl-resumen se muestran las estadísticas descriptivas de los datos analizados.
+
+```{r}
+#| label: tbl-resumen
+#| tbl-cap: "Estadísticas descriptivas"
+knitr::kable(
+  resumen_estadistico
+)
+```
+
+
+En la @tbl-resanova se muestran los resultados del Análisis de la Varianza (ANOVA).
+
+```{r}
+#| label: tbl-resanova
+#| tbl-cap: "Resultados del Análisis de la Varianza (ANOVA)"
+knitr::kable(
+  resultados_anova
+)
+```
+
+El p-valor `r round(resultados_anova$p.value[1],4)` indica que ...
+
+
+
+## Conclusiones
+
+Sus conclusiones aquí.
+
+## Referencias
+ 
 ',
     ".gitignore" = '# Archivos de historial de R
 
@@ -287,3 +372,5 @@ crear_estructura_proyecto <- function() {
   cat("2. Colocar tus datos en 'datos/crudos/'\n")  
   cat("3. Ejecutar 'Rscript generar_informe.R' para procesar datos y generar el informe\n")  
 }
+
+crear_estructura_proyecto()
