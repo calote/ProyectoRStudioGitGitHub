@@ -1,6 +1,4 @@
 # Script para generar gráficos
-
-# Cargar paquetes
 library(tidyverse)
 library(here)
 library(patchwork) # Para combinar gráficos
@@ -11,11 +9,19 @@ if (!dir.exists(here("salida", "figuras"))) {
 }
 
 # Mensaje de inicio
-cat("Iniciando generación de gráficos:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Iniciando generación de gráficos:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
+
 
 # Cargar datos procesados
 datos_limpios <- readRDS(here("datos", "procesados", "datos_limpios.rds"))
-load(here("salida", "resultados", "datos_procesados.RData"))
+
+
+# Crear gráficos
+p <- ggplot(datos_limpios, aes(x = variable1, y = variable2)) +
+  geom_point() +
+  theme_minimal() +
+  labs(title = "Título del gráfico")
 
 # Tema personalizado para todos los gráficos
 mi_tema <- theme_minimal() +
@@ -27,7 +33,7 @@ mi_tema <- theme_minimal() +
   )
 
 # Gráfico 1: Histograma de la variable numérica por grupo
-p1 <- ggplot(datos_limpios, aes(x = variable_numerica, fill = grupo)) +
+p1 <- ggplot(datos_limpios, aes(x = variable1, fill = grupo)) +
   geom_histogram(alpha = 0.7, position = "identity", bins = 20) +
   labs(
     title = "Distribución por grupo",
@@ -37,7 +43,7 @@ p1 <- ggplot(datos_limpios, aes(x = variable_numerica, fill = grupo)) +
   mi_tema
 
 # Gráfico 2: Diagrama de cajas por grupo
-p2 <- ggplot(datos_limpios, aes(x = grupo, y = variable_numerica, fill = grupo)) +
+p2 <- ggplot(datos_limpios, aes(x = grupo, y = variable1, fill = grupo)) +
   geom_boxplot() +
   labs(
     title = "Comparación entre grupos",
@@ -59,6 +65,13 @@ ggsave(here("salida", "figuras", "histograma.png"), p1,
 ggsave(here("salida", "figuras", "boxplot.png"), p2, 
        width = 8, height = 4, dpi = 300)
 
+ggsave(here("salida", "figuras", "grafico1.png"), p, 
+       width = 8, height = 5, dpi = 300)
+       
 # Mensaje final
-cat("Generación de gráficos completada:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
-cat("Gráficos guardados en: salida/figuras/\n")
+cat("Generación de gráficos completada:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
+cat("Gráficos guardados en: salida/figuras/")
+cat("")
+
+
