@@ -1,5 +1,4 @@
 # Script para realizar análisis estadísticos
-
 # Cargar paquetes
 library(tidyverse)
 library(here)
@@ -11,7 +10,8 @@ if (!dir.exists(here("salida", "resultados"))) {
 }
 
 # Mensaje de inicio
-cat("Iniciando análisis estadístico:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Iniciando análisis estadístico:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
 
 # Cargar datos procesados
 datos_limpios <- readRDS(here("datos", "procesados", "datos_limpios.rds"))
@@ -21,20 +21,21 @@ resumen_estadistico <- datos_limpios %>%
   group_by(grupo) %>%
   summarize(
     n = n(),
-    media = mean(variable_numerica, na.rm = TRUE),
-    mediana = median(variable_numerica, na.rm = TRUE),
-    desv_est = sd(variable_numerica, na.rm = TRUE),
-    min = min(variable_numerica, na.rm = TRUE),
-    max = max(variable_numerica, na.rm = TRUE)
+    media = mean(variable1, na.rm = TRUE),
+    mediana = median(variable1, na.rm = TRUE),
+    desv_est = sd(variable1, na.rm = TRUE),
+    min = min(variable1, na.rm = TRUE),
+    max = max(variable1, na.rm = TRUE)
   )
 
 # Realizar análisis inferencial
 # ANOVA para comparar grupos
-modelo_anova <- aov(variable_numerica ~ grupo, data = datos_limpios)
+modelo_anova <- aov(variable1 ~ grupo, data = datos_limpios)
 resultados_anova <- tidy(modelo_anova)
 
 # Correlaciones (si hubiera más variables numéricas)
-matriz_correlacion <- cor(datos_limpios %>% select_if(is.numeric), use = "pairwise.complete.obs")
+matriz_correlacion <- cor(datos_limpios %>% select_if(is.numeric), 
+                          use = "pairwise.complete.obs")
 
 # Guardar resultados
 save(
@@ -45,5 +46,9 @@ save(
 )
 
 # Mensaje final
-cat("Análisis estadístico completado:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
-cat("Resultados guardados en: salida/resultados/datos_procesados.RData\n")
+cat("Análisis estadístico completado:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+cat("")
+cat("Resultados guardados en: salida/resultados/datos_procesados.RData")
+cat("")
+
+
