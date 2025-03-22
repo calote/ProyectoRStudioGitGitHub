@@ -212,6 +212,7 @@ format:
         }                   
         
 #editor: source
+lightbox: true
 bibliography: referencias.bib  # puede comentarla si no usa referencias
 execute:
   echo: false
@@ -490,4 +491,3 @@ crear_estructura_proyecto <- function() {
 }
 
 crear_estructura_proyecto()
-
