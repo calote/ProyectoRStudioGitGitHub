@@ -171,21 +171,29 @@ gitcreds::gitcreds_set()
       una vez)
     - `generar_informe.R`: Ejecutar los análisis y generar el informe
       (cada vez que sea necesario)
+    - `generar_informe_solo.R`: Generar el informe únicamente
+      (cada vez que sea necesario)
 
-2.  **Mejor experiencia para el usuario**:
+    La ejecución de los scripts se puede realizar de dos modos:
+
+    a. Abrir el fichero de script en RStudio y pulsar sobre el botón "Source" (parte superior derecha)
+
+    b. En la pestaña "Terminal" de RStudio ejecutar, por ejemplo, la siguiente instrucción: `Rscript generar_informe.R`
+
+3.  **Mejor experiencia para el usuario**:
 
     - El alumno primero usa `crear_estructura.R` para preparar su
       proyecto
     - Luego adapta los scripts a sus necesidades
-    - Finalmente usa `generar_informe.R` para ejecutar todo el proceso
+    - Finalmente usa `generar_informe.R` para ejecutar todo el proceso o usa `generar_informe_solo.R`para generar el informe únicamente
 
-3.  **Gestión robusta de errores**:
+4.  **Gestión robusta de errores**:
 
     - Mejor registro de errores con archivos de log para cada script
     - Verificación de requisitos previos antes de ejecutar
     - Mensajes claros sobre qué hacer en caso de error
 
-4.  **Flexibilidad de despliegue**:
+5.  **Flexibilidad de despliegue**:
 
     - Los informes finales se copian a una carpeta específica
       (`salida/informes/`)
