@@ -80,6 +80,7 @@ ggsave(here("salida", "figuras", "grafico1.png"), p, width = 8, height = 5, dpi 
 title: "Título del informe"
 author: "Tu nombre"
 date: today
+embed-resources: true
 format:
   html:
     toc: true
