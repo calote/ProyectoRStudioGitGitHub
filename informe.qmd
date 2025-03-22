@@ -29,6 +29,7 @@ format:
         }                   
         
 #editor: source
+lightbox: true
 bibliography: referencias.bib  # puede comentarla si no usa referencias
 execute:
   echo: false
@@ -89,6 +90,17 @@ Como se ha indicado en la [Nota @nte-introduccion] de la sección @sec-introducc
 knitr::include_graphics("salida/figuras/grafico1.png")
 ```
 
+```{r}
+#| fig-cap: "Descripción de la figura de exploración "
+#| label: fig-exploracion
+#| out-width: 100%
+#| fig-pos: H
+knitr::include_graphics("salida/figuras/exploracion.png")
+```
+
+
+
+
 En la @fig-grafico1 se muestra un gráfico con los datos analizados.
 
 En el texto se puede escribir código como el siguiente: `x = mean(c(1,2,3))` o `y = sd(c(1,2,3))`, calcule ...
@@ -127,4 +139,5 @@ El p-valor `r round(resultados_anova$p.value[1],4)` indica que ...
 Sus conclusiones aquí.
 
 ## Referencias
+ 
 
